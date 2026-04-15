@@ -24,6 +24,10 @@ def dashboard():
           return render_template('dashboard.html')
         else:
             return redirect(url_for('login_page'))
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
+    return redirect(url_for('login_page'))        
 
 if __name__ == '__main__':
     app.run(debug=True)
