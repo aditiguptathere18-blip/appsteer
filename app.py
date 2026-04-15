@@ -1,7 +1,16 @@
 from flask import Flask, render_template, request, redirect, url_for,session
-
+import psycopg2
 app = Flask(__name__)
 app.secret_key = "mysecretkey"
+
+conn = psycopg2.connect(
+    host="localhost",
+    database="attendance_db",
+    user="postgres",
+    password="jessie32"
+)
+
+cursor = conn.cursor()
 
 @app.route('/')
 def login_page():
@@ -12,11 +21,16 @@ def login():
     email = request.form.get('email')
     password = request.form.get('password')
 
-    if email == "admin@gmail.com" and password == "1234":
+    cursor.execute(
+        "SELECT * FROM public.users WHERE email=%s AND password=%s",(email, password)
+    )
+    user = cursor.fetchone()
+
+    if user:
         session['user'] = email
         return redirect(url_for('dashboard'))
     else:
-        return render_template('login.html',error="Invalid email or password",email=email)
+        return render_template('login.html',error="Invalid email or password")
     
 @app.route('/dashboard')
 def dashboard():
@@ -27,7 +41,8 @@ def dashboard():
 @app.route('/logout')
 def logout():
     session.pop('user', None)
-    return redirect(url_for('login_page'))        
+    return redirect(url_for('login_page'))      
+  
 
 if __name__ == '__main__':
     app.run(debug=True)
