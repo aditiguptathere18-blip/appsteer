@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Attendance</title>
+    </head>
+    <body>
+        <h2>Mark Attendance</h2>
+   
+    <form action="/attendance" method="POST">
+        <input type="text" name="name" placeholder="Enter Name" required>
+        <br><br>
+        <input type="date" name="date" required>
+        <br><br>
+        <select name="status">
+            <option value="Present">Present</option>
+            <option value="Absent">Absent</option>
+
+        </select>
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+    <br>
+    <a href="/dashboard">Back to dashboard</a>
+     </body>
+</html>

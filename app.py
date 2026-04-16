@@ -43,6 +43,23 @@ def logout():
     session.pop('user', None)
     return redirect(url_for('login_page'))      
   
+@app.route('/attendance', methods=['GET', 'POST'])
+def attendance():
+    if 'user' not in session:
+        return redirect(url_for('login_page'))
+    if request.method == 'POST':
+        name= request.form.get('name')
+        date= request.form.get('date')
+        status= request.form.get('status')
+
+        cursor.execute(
+            "INSERT INTO attendance(name,date,status) VALUES (%s, %s, %s)",
+            (name, date, status)
+
+    )
+        conn.commit()
+        return "Attendance Recorded Successfully"
+    return render_template('attendance.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

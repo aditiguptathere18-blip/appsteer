@@ -5,7 +5,12 @@
     </head>
     <body>
         <h1>Welcome to Dashboard</h1>
-        <p>Login Successful</p>
-        <a href="/logout">Logout</a>
+        <h2>Welcome {{ session['user'] }}</h2>
+        <a href="/attendance">
+            <button>Mark Attendance</button>
+        </a>
+        <a href="/logout">
+            <button>Logout</button>
+        </a>
     </body>
 </html>
