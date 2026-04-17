@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Attendance Records</title>
+         <link rel="stylesheet" href="{{ url_for('static',filename='view_attendance.css')}}">
+    </head>
+    <body>
+        <h2>Attendance Records</h2>
+        {% if data %}
+        <table border="1">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            
+            </tr>
+            {% for row in data %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+             <td> <a href="/delete/{{ row[0] }}">
+                    <button>Delete</button>
+                </a>
+            </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p style="text-align:center; margin-top:20px; font-size:18px; color:gray;">NO attendance records found</p>
+        {% endif %}
+        <br>
+        <a href="/dashboard">Back to Dashboard</a>
+    </body>
+</html>

@@ -61,5 +61,19 @@ def attendance():
         return "Attendance Recorded Successfully"
     return render_template('attendance.html')
 
+@app.route('/view_attendance')
+def view_attendance():
+    if 'user' not in session:
+        return redirect(url_for('login_page'))
+    cursor.execute("SELECT * FROM attendance ORDER BY id DESC")
+    data = cursor.fetchall()
+    return render_template('view_attendance.html', data=data)
+
+@app.route('/delete/<int:id>')
+def delete(id):
+    cursor.execute("DELETE FROM attendance WHERE id=%s",(id,))
+    conn.commit()
+    return (url_for('view_attendance'))
+ 
 if __name__ == '__main__':
     app.run(debug=True)
