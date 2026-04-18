@@ -48,17 +48,19 @@ def attendance():
     if 'user' not in session:
         return redirect(url_for('login_page'))
     if request.method == 'POST':
-        name= request.form.get('name')
+        name= session['user']
         date= request.form.get('date')
         status= request.form.get('status')
+        latitude= request.form.get('latitude')
+        longitude= request.form.get('longitude')
 
         cursor.execute(
-            "INSERT INTO attendance(name,date,status) VALUES (%s, %s, %s)",
-            (name, date, status)
+            "INSERT INTO attendance(name,date,status,latitude,longitude) VALUES (%s, %s, %s, %s, %s)",
+            (name, date, status, latitude, longitude)
 
     )
         conn.commit()
-        return "Attendance Recorded Successfully"
+        return redirect(url_for('dashboard'))
     return render_template('attendance.html')
 
 @app.route('/view_attendance')
@@ -73,7 +75,7 @@ def view_attendance():
 def delete(id):
     cursor.execute("DELETE FROM attendance WHERE id=%s",(id,))
     conn.commit()
-    return (url_for('view_attendance'))
+    return redirect(url_for('view_attendance'))
  
 if __name__ == '__main__':
     app.run(debug=True)

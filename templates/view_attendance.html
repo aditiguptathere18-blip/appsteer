@@ -9,19 +9,31 @@
         {% if data %}
         <table border="1">
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>Action</th>
+               
+    <th>ID</th>
+    <th>Name</th>
+    <th>Date</th>
+    <th>Status</th>
+    <th>Latitude</th>
+    <th>Longitude</th>
+    <th>Location</th>
+    <th>Action</th>
+</tr>
             
             </tr>
             {% for row in data %}
             <tr>
-                <td>{{ row[0] }}</td>
-                <td>{{ row[1] }}</td>
-                <td>{{ row[2] }}</td>
-                <td>{{ row[3] }}</td>
+                  <td>{{ row[0] }}</td> 
+                  <td>{{ row[1] }}</td>  
+                  <td>{{ row[2] }}</td>  
+                  <td>{{ row[3] }}</td> 
+                  <td>{{ row[4] }}</td>  
+                  <td>{{ row[5] }}</td>
+         <td>
+        <a href="https://www.google.com/maps?q={{ row[4] }},{{ row[5] }}" target="_blank">
+            View Location
+        </a>
+    </td>
              <td> <a href="/delete/{{ row[0] }}">
                     <button>Delete</button>
                 </a>

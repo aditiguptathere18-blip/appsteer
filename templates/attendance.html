@@ -9,7 +9,7 @@
         <h2>Mark Attendance</h2>
    
     <form action="/attendance" method="POST">
-        <input type="text" name="name" placeholder="Enter Name" required>
+       
         <br><br>
         <input type="date" name="date" required>
         <br><br>
@@ -19,9 +19,22 @@
 
         </select>
         <br><br>
+        <input type ="hidden" name="latitude" id="lat">
+        <input type="hidden"  name="longitude" id="lon">
         <button type="submit">Submit</button>
     </form>
     <br>
     <a href="/dashboard">Back to dashboard</a>
+    <script>
+    navigator.geolocation.getCurrentPosition(
+    function(position){
+        document.getElementById("lat").value = position.coords.latitude;
+        document.getElementById("lon").value = position.coords.longitude;
+    },
+    function(error){
+        alert("Please allow location access to mark attendance");
+    }
+);
+</script>
      </body>
 </html>
