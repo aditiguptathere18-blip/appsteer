@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Edit Attendance</title>
+    </head>
+    <body>
+        <h2>Edit Attendance</h2>
+        <form method="POST">
+            <input type="date" name="date" value="{{ record[2] }}" required>
+            <br><br>
+            <select name="status">
+                <option value="Present" {% if record[3] == 'Present' %}selected{% endif %}>
+                    Present
+                </option>
+                <option value="Absent" {% if record[3] == 'Absent' %}selected{% endif %}>
+                    Absent
+                </option>
+            </select>
+            <br><br>
+            <button type="submit">Update</button>
+        </form>
+        <br>
+        <a href="/view_attendance">Back</a>
+    </body>
+</html>

@@ -20,7 +20,6 @@
     <th>Action</th>
 </tr>
             
-            </tr>
             {% for row in data %}
             <tr>
                   <td>{{ row[0] }}</td> 
@@ -34,7 +33,12 @@
             View Location
         </a>
     </td>
-             <td> <a href="/delete/{{ row[0] }}">
+             <td>
+                 <a href="/edit/{{ row[0] }}">
+                 <button>Edit</button>
+                 </a>
+                
+               <a href="/delete/{{ row[0] }}">
                     <button>Delete</button>
                 </a>
             </td>

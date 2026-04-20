@@ -7,7 +7,7 @@
     </head>
     <body>
         <h2>Mark Attendance</h2>
-   
+        <h3 style="text-align:center;">Logged in as:{{ session['user'] }}</h3>
     <form action="/attendance" method="POST">
        
         <br><br>
@@ -21,7 +21,7 @@
         <br><br>
         <input type ="hidden" name="latitude" id="lat">
         <input type="hidden"  name="longitude" id="lon">
-        <button type="submit">Submit</button>
+        <button type="submit" onclick="return checkLocation()">Submit</button>
     </form>
     <br>
     <a href="/dashboard">Back to dashboard</a>
@@ -35,6 +35,15 @@
         alert("Please allow location access to mark attendance");
     }
 );
+    function checkLocation() {
+        let lat = document.getElementById("lat").value;
+        let lon = document.getElementById("lon").value;
+        if (lat ==="" || lon ===""){
+            alert("Location not captured yet. Please wait or allow location.");
+            return false;
+        }
+        return true;
+    }
 </script>
      </body>
 </html>

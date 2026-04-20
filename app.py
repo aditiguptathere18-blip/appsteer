@@ -76,6 +76,24 @@ def delete(id):
     cursor.execute("DELETE FROM attendance WHERE id=%s",(id,))
     conn.commit()
     return redirect(url_for('view_attendance'))
+
+@app.route('/edit/<int:id>', methods=['GET','POST'])
+def edit(id):
+    if 'user' not in session:
+        return redirect(url_for('login_page'))
+    if request.method == 'POST':
+        date=request.form.get('date')
+        status=request.form.get('status')
+
+        cursor.execute(
+            "UPDATE attendance SET date=%s, status=%s WHERE id=%s",
+            (date,status,id)
+        )
+        conn.commit()
+        return redirect(url_for('view_attendance'))
+    cursor.execute("SELECT * FROM attendance WHERE id=%s",(id,))
+    record=cursor.fetchone()
+    return render_template('edit_attendance.html', record=record)
  
 if __name__ == '__main__':
     app.run(debug=True)
