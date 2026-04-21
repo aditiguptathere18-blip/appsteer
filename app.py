@@ -41,7 +41,7 @@ def dashboard():
 @app.route('/logout')
 def logout():
     session.pop('user', None)
-    return redirect(url_for('login_page'))      
+    return redirect(url_for('login_page'))    
   
 @app.route('/attendance', methods=['GET', 'POST'])
 def attendance():
@@ -53,6 +53,14 @@ def attendance():
         status= request.form.get('status')
         latitude= request.form.get('latitude')
         longitude= request.form.get('longitude')
+
+        cursor.execute(
+            "SELECT * FROM attendance WHERE name=%s AND date=%s",
+            (name, date)
+        )
+        existing = cursor.fetchone()
+        if existing:
+            return "Attendance already marked for today"
 
         cursor.execute(
             "INSERT INTO attendance(name,date,status,latitude,longitude) VALUES (%s, %s, %s, %s, %s)",
