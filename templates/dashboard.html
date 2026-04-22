@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Dashboard</title>
-         <link rel="stylesheet" href="{{ url_for('static',filename='dashboard.css') }}">
-    </head>
-    <body>
-       <div class="container">
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='dashboard.css') }}">
+</head>
+<body>
+   <div class="container">
 
-        <h1>Welcome to Dashboard</h1>
-        <h2>Welcome {{ session['user'] }}</h2>
+    <h1>Welcome to Dashboard</h1>
+    <h2>Welcome {{ session['user'] }}</h2>
 
-        <div class="btn-group">
-        <a href="/attendance">
-            <button>Mark Attendance</button>
+    <h3>Admin Dashboard</h3>
+
+    <div class="btn-group">
+        <a href="/view_attendance">
+            <button>View All Attendance</button>
         </a>
-          <a href="/view_attendance">
-            <button>View Attendance</button>
-        </a>
+
         <a href="/logout">
-            <button>Logout</button>
+            <button class="logout">Logout</button> 
         </a>
-       </div>
-       </div>
-    </body>
+    </div>
+
+   </div>
+</body>
 </html>
+
+

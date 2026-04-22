@@ -27,17 +27,20 @@ def login():
     user = cursor.fetchone()
 
     if user:
-        session['user'] = email
+        session['user'] = user[1]
+        session['role'] = user[3]
         return redirect(url_for('dashboard'))
     else:
         return render_template('login.html',error="Invalid email or password")
     
 @app.route('/dashboard')
 def dashboard():
-        if 'user' in session:
-          return render_template('dashboard.html')
-        else:
-            return redirect(url_for('login_page'))
+    if 'user' not in session:
+           return redirect(url_for('login_page'))
+    if session['role'] == 'admin':
+        return render_template('dashboard.html')
+    else:
+            return render_template('employee_dashboard.html')
 @app.route('/logout')
 def logout():
     session.pop('user', None)
@@ -75,7 +78,14 @@ def attendance():
 def view_attendance():
     if 'user' not in session:
         return redirect(url_for('login_page'))
-    cursor.execute("SELECT * FROM attendance ORDER BY id DESC")
+    if session['role'] == 'admin':
+        cursor.execute("SELECT * FROM attendance ORDER BY id DESC")
+    else:
+        cursor.execute(
+            "SELECT * FROM attendance WHERE name=%s ORDER BY id DESC",
+            (session['user'],)
+        )
+
     data = cursor.fetchall()
     return render_template('view_attendance.html', data=data)
 
