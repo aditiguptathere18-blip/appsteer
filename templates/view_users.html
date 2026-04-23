@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Users</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='view_attendance.css') }}">
+    </head>
+    <body>
+        <h2>All Users</h2>
+        <table border="1">
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Action</th>
+            </tr>
+            {% for user in users %}
+            <tr>
+                <td>{{ user[0] }}</td>
+                <td>{{ user[1] }}</td>
+                <td>{{ user[3] }}</td>
+                <td>
+                    {% if user[3] !='admin' %}
+                <a href="/delete_user/{{ user [0] }}">
+                    <button>Delete</button>
+                </a>
+                {% else %}
+                <b>Protected</b>
+                {% endif %}
+            </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="/dashboard">Back</a>
+    </body>
+</html>

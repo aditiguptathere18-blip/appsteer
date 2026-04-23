@@ -112,6 +112,49 @@ def edit(id):
     cursor.execute("SELECT * FROM attendance WHERE id=%s",(id,))
     record=cursor.fetchone()
     return render_template('edit_attendance.html', record=record)
+
+@app.route('/add_user', methods=['GET','POST'])
+def add_user():
+    if 'user' not in session or session['role'] != 'admin':
+        return "Access Denied"
+    if request.method == 'POST':
+        email= request.form.get('email')
+        password= request.form.get('password')
+
+        cursor.execute(
+            "INSERT INTO users (email,password,role) VALUES (%s, %s, %s)",
+            (email,password,'employee')
+        )
+        conn.commit()
+        return redirect(url_for('dashboard'))
+    return render_template('add_user.html')
+
+@app.route('/view_users')
+def view_users():
+    if 'user' not in session or session['role']!= 'admin':
+        return "Access Denied"
+    
+    cursor.execute("SELECT * FROM users")
+    users= cursor.fetchall()
+    return render_template('view_users.html', users=users)
+
+@app.route('/delete_user/<int:id>')
+def delete_user(id):
+    if 'user' not in session or session['role']!= 'admin':
+        return "Access Denied"
+    
+    cursor.execute("SELECT role FROM users  WHERE id=%s", (id,))
+    user=cursor.fetchone()
+
+    if user and user[0] == 'admin':
+        return "Admin cannot be deleted"
+    
+    cursor.execute(
+        "DELETE FROM users WHERE id=%s",(id,))
+    conn.commit()
+    return redirect(url_for('view_users')
+    )
+    
  
 if __name__ == '__main__':
     app.run(debug=True)
