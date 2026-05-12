@@ -1,27 +1,90 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Employee Dashboard</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
-    </head>
-    <body>
-        <div class="container">
-        <h1>Employee Dashboard</h1>
-        <h2>Welcome {{ session['user'] }}</h2>
-        <div class="btn-group">
+
+<head>
+
+    <title>Employee Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='dashboard.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Employee Dashboard</h1>
+
+    <h2>Welcome {{ session['user'] }}</h2>
+
+
+    <!-- STATS CARDS -->
+
+    <div class="stats-container">
+
+        <div class="card">
+
+            <h3>My Attendance</h3>
+
+            <h2>{{ total_attendance }}</h2>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>My Productivity</h3>
+
+            <h2>{{ total_productivity }}</h2>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Total Duration</h3>
+
+            <h2>{{ total_duration }} mins</h2>
+
+        </div>
+
+    </div>
+
+
+    <!-- BUTTONS -->
+
+    <div class="btn-group">
 
         <a href="/attendance">
             <button>Mark Attendance</button>
         </a>
+
+
         <a href="/view_attendance">
             <button>View My Attendance</button>
         </a>
+
+
+        <a href="/productivity">
+            <button>Add Productivity</button>
+        </a>
+
+
+        <a href="/view_productivity">
+            <button>View Productivity</button>
+        </a>
+
+
         <a href="/logout">
-            <button>Logout</button>
+            <button class="logout">
+                Logout
+            </button>
         </a>
 
     </div>
 
 </div>
- </body>
+
+</body>
 </html>

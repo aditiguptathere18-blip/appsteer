@@ -1,0 +1,41 @@
+<!DOCTYPE html> 
+<html> 
+    <head>
+         <title>Productivity</title> 
+        </head>
+         <body> 
+     <h2>Productivity Entry</h2>
+
+     <form method="POST" action="/submit_productivity">
+
+    <label>Select Client</label>
+    <select id="clientSelect" onchange="changeClient()"> 
+    <option value="">Select Client</option> 
+    <option value="Acko">Acko</option>
+    <option value="Break time">Break time</option> 
+    </select>
+
+      <br><br>
+
+  <div id="activitiesContainer">
+   </div>
+   <br>
+
+   <button type="button" onclick="previousActivity()">Previous</button>
+   <button type="button" onclick="nextActivity()">Next</button>
+   <button type="button" onclick="addActivity()">+Add Activity</button> 
+
+
+   <br> <br>
+
+   <button type="submit">Submit All</button>
+
+</form>
+        <br><br>
+                    
+    <a href="/dashboard">Back</a> 
+      <script src="{{ url_for('static',filename='productivity.js') }}"> 
+
+      </script> 
+       </body>
+     </html>

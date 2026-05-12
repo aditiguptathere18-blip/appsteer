@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Productivity</title>
+</head>
+<body>
+
+<h2>Edit Productivity</h2>
+
+<form method="POST">
+
+    <label>Decision</label>
+    <br>
+    <input type="text"
+           name="decision"
+           value="{{ record[8] }}">
+    <br><br>
+
+    <label>Duration</label>
+    <br>
+    <input type="number"
+           name="duration"
+           value="{{ record[9] }}">
+    <br><br>
+
+    <label>Remarks</label>
+    <br>
+    <input type="text"
+           name="remarks"
+           value="{{ record[10] }}">
+    <br><br>
+
+    <button type="submit">
+        Update
+    </button>
+
+</form>
+
+<br><br>
+
+<a href="/view_productivity">
+    Back
+</a>
+
+</body>
+</html>

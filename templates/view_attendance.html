@@ -6,6 +6,16 @@
     </head>
     <body>
         <h2>Attendance Records</h2>
+        
+<form method="'GET">
+    <label>Select Date</label>
+    <input type ="date" name="date" >
+    <button type="submit">
+        Filter
+    </button>
+</form>
+<br><br>
+
         {% if data %}
         <table border="1">
             <tr>

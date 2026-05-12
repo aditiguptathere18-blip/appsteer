@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Productivity</title>
+</head>
+<body>
+
+<h2>Productivity Records</h2>
+
+<form method="'GET">
+    <label>Select Date</label>
+    <input type ="date" name="date" >
+    <button type="submit">
+        Filter
+    </button>
+</form>
+<br><br>
+
+<table border="1" cellpadding="10">
+
+<tr>
+    <th>ID</th>
+    <th>Employee</th>
+    <th>Client</th>
+    <th>Activity Type</th>
+    <th>Exact Nature</th>
+    <th>Policy Number</th>
+    <th>No Cases</th>
+    <th>Sum Assured</th>
+    <th>Decision</th>
+    <th>Duration</th>
+    <th>Remarks</th>
+    <th>Activity Date</th>
+    <th>Action</th>
+</tr>
+
+{% for row in data %}
+
+<tr>
+
+    <td>{{ row[0] }}</td>
+    <td>{{ row[1] }}</td>
+    <td>{{ row[2] }}</td>
+    <td>{{ row[3] }}</td>
+    <td>{{ row[4] }}</td>
+    <td>{{ row[5] }}</td>
+    <td>{{ row[6] }}</td>
+    <td>{{ row[7] }}</td>
+    <td>{{ row[8] }}</td>
+    <td>{{ row[9] }}</td>
+    <td>{{ row[10] }}</td>
+    <td>{{ row[11] }}</td>
+    <td>
+        <a href="/edit_productivity/{{ row[0] }}">
+            <button>Edit</button>
+        </a>
+        <a href="/delete_productivity/{{ row[0] }}">
+            <button>Delete</button>
+        </a>
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<br><br>
+
+<a href="/dashboard">Back</a>
+
+</body>
+</html>
